@@ -7,8 +7,8 @@ const ListItem = ({listing}) => (
   //const listing = props.listing
   <Card className="card">
     <CardHeader
-      title={listing.title}
-      subtitle={listing.url}
+      title={listing.attributes.title}
+      subtitle={listing.attributes.url}
       actAsExpander={true}
       showExpandableButton={true}
     />
