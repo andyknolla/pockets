@@ -1,14 +1,20 @@
-.App {
-  text-align: center;
-}
+
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 75px;
   padding: 20px;
   color: white;
+  text-align: center;
 }
 
 .App-intro {
   font-size: large;
+}
+
+ul {
+  padding: 0;
+}
+.card {
+  margin: 15px;
 }
