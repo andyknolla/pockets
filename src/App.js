@@ -44,7 +44,7 @@ class App extends Component {
     helpers.fetchListings()
     .then(function(data) {
       this.setState({
-        apiListings: data
+        apiListings: data.data.data.data
       })
       console.log(data.data.data.data);
     }.bind(this))
@@ -57,7 +57,7 @@ class App extends Component {
             <div className="App-header">
               <h2>Listings</h2>
             </div>
-              <List listings={this.state.listings} />
+              <List listings={this.state.apiListings} />
           </div>
         </MuiThemeProvider>
     );
