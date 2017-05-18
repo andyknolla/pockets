@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import List from './components/list';
+import helpers from './utils/helpers';
 injectTapEventPlugin();
 
 class App extends Component {
@@ -33,9 +34,21 @@ class App extends Component {
         title: 'Fourth listing',
         url: 'Fourth url'
       }
-    ]
+    ],
+    apiListings: []
+
   }
 }
+
+  componentDidMount() {
+    helpers.fetchListings()
+    .then(function(data) {
+      this.setState({
+        apiListings: data
+      })
+      console.log(data.data.data.data);
+    }.bind(this))
+  }
 
   render() {
     return (
