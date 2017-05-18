@@ -13,31 +13,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      listings: [
-      {
-        id: 1,
-        title: 'First listing',
-        url: 'First url'
-      },
-      {
-        id: 2,
-        title: 'Second listing',
-        url: 'Second url'
-      },
-      {
-        id: 3,
-        title: 'Third listing',
-        url: 'Third url'
-      },
-      {
-        id: 4,
-        title: 'Fourth listing',
-        url: 'Fourth url'
-      }
-    ],
-    apiListings: []
-
-  }
+      apiListings: []
+    }
 }
 
   componentDidMount() {

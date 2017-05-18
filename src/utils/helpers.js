@@ -14,10 +14,8 @@ const helpers = {
       return {
         data: data
       }
-      //console.log(data);
     })
-    //console.log(data);
   }
 }
 
-module.exports = helpers;
+export default helpers;
