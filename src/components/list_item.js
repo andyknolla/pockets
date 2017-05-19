@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import { Link } from 'react-router-dom';
 
 
 const ListItem = ({listing}) => (
@@ -13,7 +14,7 @@ const ListItem = ({listing}) => (
       showExpandableButton={true}
     />
     <CardActions>
-      <FlatButton label="Action1" />
+      <Link to={`/${listing.id}`} ><FlatButton to="/about" label="Action1" /></Link>
       <FlatButton label="Action2" />
     </CardActions>
     <CardText expandable={true}>

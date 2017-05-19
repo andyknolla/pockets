@@ -15,6 +15,14 @@ const helpers = {
         data: data
       }
     })
+  },
+  fetchSingleListing: function(id) {
+    return axios.get(`http://clientside-api.herokuapp.com/api/v1/listings/${id}`, config)
+    .then(function(data) {
+      return {
+        data: data
+      }
+    })
   }
 }
 
