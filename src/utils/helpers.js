@@ -7,6 +7,9 @@ import axios from 'axios';
 const config = {
   headers: { 'Authorization': 'b4caaa6dc0bac64f536fea340c5f8d29'}
 }
+
+
+
 const helpers = {
   fetchListings: function() {
     return axios.get('http://clientside-api.herokuapp.com/api/v1/listings/', config)
@@ -23,6 +26,17 @@ const helpers = {
         data: data
       }
     })
+  },
+  createNewListing: function(name, url) {
+    let postData = {
+      data: {
+        attributes: {
+          title: name,
+          url: url
+        }
+      }
+    }
+    return axios.post('http://clientside-api.herokuapp.com/api/v1/listings/', postData, config)
   }
 }
 

@@ -6,17 +6,12 @@ class SingleListing extends Component {
   constructor(props) {
     super(props);
 
-
-    const match = 'dirka'
-
-
     this.state = {
       listingData: []
     }
   }
+  
   componentWillMount() {
-    console.log(this.props.location.pathname);
-
     helpers.fetchSingleListing( this.props.location.pathname )
       .then(function(data) {
         this.setState({
@@ -24,7 +19,6 @@ class SingleListing extends Component {
         })
         console.log(data.data.data.data.attributes);
       }.bind(this))
-
   }
 
   render() {
@@ -33,7 +27,6 @@ class SingleListing extends Component {
           <div>{this.state.listingData.title}</div>
           <div>{this.state.listingData.url}</div>
       </div>
-
     )
   }
 }
