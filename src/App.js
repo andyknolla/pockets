@@ -4,6 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { elementType } from 'react-prop-types';
 
 import List from './components/list';
 import helpers from './utils/helpers';
@@ -12,6 +13,10 @@ injectTapEventPlugin();
 class App extends Component {
   constructor(props) {
     super(props);
+
+    const propTypes = {
+      router: elementType
+    }
 
     this.state = {
       apiListings: [],
@@ -44,7 +49,9 @@ class App extends Component {
   submitForm(e) {
     e.preventDefault();
     helpers.createNewListing(this.state.titleInput, this.state.urlInput )
-  //  window.location.reload();
+    .then( () => {
+      window.location.reload();
+    });
   }
 
   render() {

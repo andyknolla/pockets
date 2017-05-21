@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import helpers from '../utils/helpers';
-
 import { Link } from 'react-router';
 import { elementType } from 'react-prop-types';
 
-class SingleListing extends Component {
+class EditListing extends Component {
   constructor(props) {
     super(props);
-
 
     const propTypes = {
       router: elementType
@@ -15,9 +13,7 @@ class SingleListing extends Component {
 
     this.state = {
       listingData: [],
-      postId: undefined,
-      titleInput: '',
-      urlInput: ''
+      postId: undefined
     }
   }
 
@@ -26,9 +22,7 @@ class SingleListing extends Component {
       .then(function(data) {
         this.setState({
           listingData: data.data.data.data.attributes,
-          postId: data.data.data.data.id,
-          titleInput: data.data.data.data.attributes.title,
-          urlInput: data.data.data.data.attributes.url
+          postId: data.data.data.data.id
         })
         console.log(data.data.data.data.attributes);
       }.bind(this))
@@ -57,31 +51,25 @@ class SingleListing extends Component {
     helpers.deletePost(this.state.postId)
     .then( () => {
       this.props.history.push('/');
-    });
+   });
   }
+
 
   render() {
     return (
-      <div>
-          <div>{this.state.listingData.title}</div>
-          <div>{this.state.listingData.url}</div>
-          <button
-            onClick={this.onDeleteClick.bind(this)} >
-            Delete
-          </button>
 
-          <form id="edit-listing">
+      <form id="edit-listing">
 
-            <label htmlFor="title-input">Name</label>
-            <input id="title-input" type="text" ref="title" onChange={this.handleTitleInputChange.bind(this)} value={this.state.titleInput}></input>
+        <label htmlFor="title-input">Name</label>
+        <input id="title-input" type="text" ref="title" onChange={this.handleTitleInputChange.bind(this)} value={this.state.titleInput}></input>
 
-            <label htmlFor="url-input">Url</label>
-            <input id="url-input" type="url" ref="url" onChange={this.handleUrlInputChange.bind(this)} value={this.state.urlInput}></input>
-            <input type="submit" onClick={this.submitForm.bind(this)}></input>
-          </form>
-      </div>
+        <label htmlFor="url-input">Url</label>
+        <input id="url-input" type="url" ref="url" onChange={this.handleUrlInputChange.bind(this)} value={this.state.urlInput}></input>
+        <input type="submit" onClick={this.submitForm.bind(this)}></input>
+      </form>
+
     )
   }
 }
 
-export default SingleListing;
+export default EditListing;
