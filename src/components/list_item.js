@@ -7,15 +7,14 @@ import { Link } from 'react-router-dom';
 const ListItem = ({listing}) => (
   //const listing = props.listing
   <Card className="card">
-    <CardHeader
+    <Link to={`/${listing.id}`} ><CardHeader
       title={listing.attributes.title}
       subtitle={listing.attributes.url}
       actAsExpander={true}
       showExpandableButton={true}
-    />
+    /></Link>
     <CardActions>
-      <Link to={`/${listing.id}`} ><FlatButton to="/about" label="Action1" /></Link>
-      <FlatButton label="Action2" />
+      <Link to={`/${listing.id}`} ><FlatButton to="/about" label="Details" /></Link>
     </CardActions>
     <CardText expandable={true}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
