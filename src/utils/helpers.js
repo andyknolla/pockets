@@ -37,6 +37,9 @@ const helpers = {
       }
     }
     return axios.post('http://clientside-api.herokuapp.com/api/v1/listings/', postData, config)
+  },
+  deletePost: function(id) {
+    return axios.delete(`http://clientside-api.herokuapp.com/api/v1/listings/${id}`, config)
   }
 }
 

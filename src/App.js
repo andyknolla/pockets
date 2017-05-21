@@ -45,7 +45,7 @@ class App extends Component {
   submitForm(e) {
     e.preventDefault();
     helpers.createNewListing(this.state.titleInput, this.state.urlInput )
-    window.location.reload();
+  //  window.location.reload();
   }
 
   render() {
