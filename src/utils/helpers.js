@@ -40,6 +40,17 @@ const helpers = {
   },
   deletePost: function(id) {
     return axios.delete(`http://clientside-api.herokuapp.com/api/v1/listings/${id}`, config)
+  },
+  editListing: function(id, name, url) {
+    let postData = {
+      data: {
+        attributes: {
+          title: name,
+          url: url
+        }
+      }
+    }
+    return axios.put(`http://clientside-api.herokuapp.com/api/v1/listings/${id}`, postData, config)
   }
 }
 

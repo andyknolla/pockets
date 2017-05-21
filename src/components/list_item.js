@@ -14,8 +14,8 @@ const ListItem = ({listing}) => (
       showExpandableButton={true}
     />
     <CardActions>
-      <Link to={`/${listing.id}`} ><FlatButton to="/about" label="Action1" /></Link>
-      <FlatButton label="Action2" />
+      <Link to={`/${listing.id}`} ><FlatButton to="/about" label="Details" /></Link>
+      <Link to={`/${listing.id}`}><FlatButton label="Edit" /></Link>
     </CardActions>
     <CardText expandable={true}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
