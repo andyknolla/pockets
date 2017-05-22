@@ -12,7 +12,7 @@ const config = {
 
 const helpers = {
   fetchListings: function() {
-    return axios.get('http://clientside-api.herokuapp.com/api/v1/listings/', config)
+    return axios.get('https://clientside-api.herokuapp.com/api/v1/listings/', config)
     .then(function(data) {
       return {
         data: data
@@ -20,7 +20,7 @@ const helpers = {
     })
   },
   fetchSingleListing: function(id) {
-    return axios.get(`http://clientside-api.herokuapp.com/api/v1/listings/${id}`, config)
+    return axios.get(`https://clientside-api.herokuapp.com/api/v1/listings/${id}`, config)
     .then(function(data) {
       return {
         data: data
@@ -36,10 +36,10 @@ const helpers = {
         }
       }
     }
-    return axios.post('http://clientside-api.herokuapp.com/api/v1/listings/', postData, config)
+    return axios.post('https://clientside-api.herokuapp.com/api/v1/listings/', postData, config)
   },
   deletePost: function(id) {
-    return axios.delete(`http://clientside-api.herokuapp.com/api/v1/listings/${id}`, config)
+    return axios.delete(`https://clientside-api.herokuapp.com/api/v1/listings/${id}`, config)
   },
   editListing: function(id, name, url) {
     let postData = {
@@ -50,7 +50,7 @@ const helpers = {
         }
       }
     }
-    return axios.put(`http://clientside-api.herokuapp.com/api/v1/listings/${id}`, postData, config)
+    return axios.put(`https://clientside-api.herokuapp.com/api/v1/listings/${id}`, postData, config)
   }
 }
 
