@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import './css/skeleton.css';
+//import './css/font-awesome.min.css';
+import './css/App.css';
+
+// import injectTapEventPlugin from 'react-tap-event-plugin';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+// import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { elementType } from 'react-prop-types';
 
 import List from './components/list';
 import helpers from './utils/helpers';
-injectTapEventPlugin();
+//injectTapEventPlugin();
 
 class App extends Component {
   constructor(props) {
@@ -56,23 +59,46 @@ class App extends Component {
 
   render() {
     return (
-        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        //<MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
           <div className='App'>
             <div className="App-header">
               <h2>Listings</h2>
             </div>
-            <form id="new-listing">
+              <form id="new-listing">
+                <div className="new-listing">
+                  <div className="name-input">
+                    <label htmlFor="title-input">Name</label>
+                    <input
+                      id="title-input"
+                      type="text"
+                      ref="title"
+                      onChange={this.handleTitleInputChange.bind(this)}
+                      value={this.state.titleInput}
+                      placeholder="Property name"
+                      className=""
+                      ></input>
+                  </div>
+                  <div className="url-input">
+                    <label htmlFor="url-input">Url</label>
+                    <input
+                      id="url-input"
+                      type="url"
+                      ref="url"
+                      onChange={this.handleUrlInputChange.bind(this)}
+                      value={this.state.urlInput}
+                      placeholder="Url"
+                      className=""
+                      ></input>
+                  </div>
+                  <input type="submit" onClick={this.submitForm.bind(this)}></input>
+              </div>
+              </form>
 
-              <label htmlFor="title-input">Name</label>
-              <input id="title-input" type="text" ref="title" onChange={this.handleTitleInputChange.bind(this)} value={this.state.titleInput}></input>
-
-              <label htmlFor="url-input">Url</label>
-              <input id="url-input" type="url" ref="url" onChange={this.handleUrlInputChange.bind(this)} value={this.state.urlInput}></input>
-              <input type="submit" onClick={this.submitForm.bind(this)}></input>
-            </form>
-              <List listings={this.state.apiListings} />
-          </div>
-        </MuiThemeProvider>
+              <div className="container">
+                <List listings={this.state.apiListings} />
+              </div>
+            </div>
+        //</MuiThemeProvider>
     );
   }
 }

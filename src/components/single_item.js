@@ -3,6 +3,7 @@ import helpers from '../utils/helpers';
 
 import { Link } from 'react-router';
 import { elementType } from 'react-prop-types';
+import $ from 'jquery';
 
 class SingleListing extends Component {
   constructor(props) {
@@ -60,25 +61,50 @@ class SingleListing extends Component {
     });
   }
 
+  editListing() {
+    $('#edit-listing').show();
+    $('.single-heading, .edit-button').hide()
+  }
+  cancel() {
+    $('#edit-listing').hide();
+    $('.single-heading, .edit-button').show();
+  }
+
   render() {
     return (
-      <div>
-          <div>{this.state.listingData.title}</div>
-          <div>{this.state.listingData.url}</div>
-          <button
-            onClick={this.onDeleteClick.bind(this)} >
-            Delete
-          </button>
-
+      <div className="single-listing container">
+        <div className="eight columns">
+          <div className="single-heading">
+            <h2>{this.state.listingData.title}</h2>
+            <p className="">{this.state.listingData.url}</p>
+          </div>
           <form id="edit-listing">
 
             <label htmlFor="title-input">Name</label>
-            <input id="title-input" type="text" ref="title" onChange={this.handleTitleInputChange.bind(this)} value={this.state.titleInput}></input>
+            <input id="title-input" type="text" ref="title" onChange={this.handleTitleInputChange.bind(this)} value={this.state.titleInput} placeholder="Name"></input>
 
             <label htmlFor="url-input">Url</label>
-            <input id="url-input" type="url" ref="url" onChange={this.handleUrlInputChange.bind(this)} value={this.state.urlInput}></input>
-            <input type="submit" onClick={this.submitForm.bind(this)}></input>
+            <input id="url-input" type="url" ref="url" onChange={this.handleUrlInputChange.bind(this)} value={this.state.urlInput} placeholder="Url"></input>
+            <div>
+              <button className="cancel-button" onClick={this.cancel.bind(this)}>Cancel</button>
+              <input type="submit" onClick={this.submitForm.bind(this)}></input>
+            </div>
           </form>
+          <button
+            onClick={this.onDeleteClick.bind(this)}
+            className="delete-button"
+            >
+            Delete
+          </button>
+          <button
+            onClick={this.editListing.bind(this)}
+            className="edit-button" >
+            Edit
+          </button>
+
+
+        </div>
+        <img src="http://placehold.it/350x350" alt="" className="four columns"/>
       </div>
     )
   }

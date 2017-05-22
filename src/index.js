@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Routes from './routes';
 
-import './index.css';
+import './css/index.css';
 
 ReactDOM.render(
   <Routes />,

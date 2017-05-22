@@ -1,28 +1,28 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+// import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+// import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
+import edit from '../../public/edit.png';
+import trash from '../../public/trash.png';
+
 
 
 const ListItem = ({listing}) => (
   //const listing = props.listing
-  <Card className="card">
-    <Link to={`/${listing.id}`} ><CardHeader
-      title={listing.attributes.title}
-      subtitle={listing.attributes.url}
-      actAsExpander={true}
-      showExpandableButton={true}
-    /></Link>
-    <CardActions>
-      <Link to={`/${listing.id}`} ><FlatButton to="/about" label="Details" /></Link>
-    </CardActions>
-    <CardText expandable={true}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-      Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-      Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-    </CardText>
-  </Card>
+  <Link to={`/${listing.id}`} className="">
+    <li className="six columns card">
+
+    <div className="title">{listing.attributes.title}
+      <span className="icons">
+        <img src={edit} alt="edit" className="icon"/>
+        <img src={trash} alt="delete" className="icon" />
+      </span>
+    </div>
+    <div className="url">{listing.attributes.url}</div>
+  </li>
+</Link>
+
+
 );
 
 export default ListItem;
