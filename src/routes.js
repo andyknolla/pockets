@@ -8,7 +8,6 @@ const Routes = () => (
   <Router>
       <Switch>
         <Route exact path="/" component={App} />
-        <Route path="*" component={NotFound} />
       </Switch>
   </Router>
 );

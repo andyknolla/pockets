@@ -46,8 +46,10 @@ class Home extends Component {
       touched: { ...this.state.touched, [field]: true },
     });
   }
+  disabled() {
+    
+  }
   submitForm(e) {
-    console.log('submit');
     e.preventDefault();
     helpers.createNewListing(this.state.titleInput, this.state.urlInput )
     .then( () => {
@@ -57,7 +59,6 @@ class Home extends Component {
 
   render() {
     const errors = validate(this.state.titleInput, this.state.urlInput);
-    // const { titleInput, urlInput } = this.state;
     const isEnabled = !Object.keys(errors).some(x => errors[x]);
     const shouldMarkError = (field) => {
       const hasError = errors[field];
@@ -99,7 +100,7 @@ class Home extends Component {
                 ></input>
                 <div className={shouldMarkError('urlInput') ? "error-text" : "hidden"}>Please enter a valid url</div>
             </div>
-            <input type="submit" disabled={!isEnabled} ></input>
+            <input type="submit" disabled={!isEnabled} onClick={this.disabled.bind(this)} value="Enter"></input>
           </div>
         </form>
 

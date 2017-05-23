@@ -1,5 +1,5 @@
 body {
-  background: lightgray;
+  background: #f5f5f5;
   color: #464646;
 }
 a {
@@ -22,9 +22,13 @@ li {
 button, input[type="submit"]{
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
   transition: box-shadow 0.5s ease;
+  height: 30px;
+  padding: 0 10px;
+  line-height: normal;
 }
 button:hover, input[type="submit"]:hover {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3)
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: 1px solid lightgray;
 }
 .new-listing input, .single-listing input {
   width: 100%;
@@ -33,16 +37,18 @@ button:hover, input[type="submit"]:hover {
 input[type="submit"] {
   background: #777B88;
   color: #E0E6FF;
+  height: 38px;
   width: 120px;
+  font-size:0.8em;
   margin-left: 5px;
-  margin-top: 30px;
+  margin-top: 29px;
 }
 input[type="submit"]:disabled {
   color: lightgray;
   box-shadow: none;
 }
 .App {
-  background: lightgray;
+  background: #f5f5f5;
   height: 100%;
   color: #464646;
 }
@@ -110,12 +116,39 @@ input[type="submit"]:disabled {
   background: #643d51;
   color: #330033;
 }
-.delete-button {
+.delete-group {
+  position: relative;
+  display: inline-block;
+}
+.dont-delete {
+  position: absolute;
+  top:19px;
+  left: -12px;
+  width: 105px;
+  background: #f5f5f5;
+}
+.dont-delete:hover {
+  z-index: +1;
+}
+.dummy-delete-button {
   color: #660033;
+}
+.delete-button {
+  color: #333;
+  background: #c43636;
+  font-size: 1.2em;
+  box-shadow: 0 9px 15px rgba(0,0,0,0.5);
+  transform: translateY(-5px);
+  border: 1px solid #c43636;
+}
+.delete-button:hover {
+  box-shadow: 0 9px 15px 5px rgba(0,0,0,0.5);
+  border: 1px solid #c43636;
 }
 .back {
   display: block;
   margin-top: 10px;
+  width: 80px;
 }
 .back .icon {
   margin-right: 8px;

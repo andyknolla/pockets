@@ -39,7 +39,7 @@ class SingleListing extends Component {
       }.bind(this))
   }
   componentDidMount() {
-    $('#edit-listing').hide();
+    $('#edit-listing, .delete-button, .dont-delete').hide();
   }
   handleTitleInputChange() {
     this.setState({
@@ -50,6 +50,16 @@ class SingleListing extends Component {
     this.setState({
       urlInput: this.refs.url.value
     })
+  }
+  showDelete() {
+    $('.delete-button').show();
+    $('.dont-delete').show();
+    $('.dummy-delete-button').hide();
+  }
+  dontDelete() {
+    $('.dummy-delete-button').show();
+    $('.delete-button').hide();
+    $('.dont-delete').hide();
   }
   onDeleteClick() {
     helpers.deletePost(this.state.postId)
@@ -80,7 +90,6 @@ class SingleListing extends Component {
 
   render() {
     const errors = validate(this.state.titleInput, this.state.urlInput);
-    // const { titleInput, urlInput } = this.state;
     const isEnabled = !Object.keys(errors).some(x => errors[x]);
     const shouldMarkError = (field) => {
       const hasError = errors[field];
@@ -92,9 +101,10 @@ class SingleListing extends Component {
         <div className="eight columns">
           <div className="single-heading">
             <h2>{this.state.listingData.title}</h2>
-            <p className="">{this.state.listingData.url}</p>
+            <Link to={this.state.listingData.url ? this.state.listingData.url : ''}><p className="">{this.state.listingData.url}</p></Link>
           </div>
           <form id="edit-listing" onSubmit={this.submitForm.bind(this)}>
+
             <label htmlFor="title-input">Name</label>
             <input
               id="title-input"
@@ -124,17 +134,18 @@ class SingleListing extends Component {
               <input type="submit"></input>
             </div>
           </form>
-          <button
-            onClick={this.onDeleteClick.bind(this)}
-            className="delete-button"
-            >
-            Delete
-          </button>
+          <div className="delete-group">
+            <button
+              onClick={this.showDelete.bind(this)}
+              className="dummy-delete-button">Delete</button>
+            <button onClick={this.dontDelete.bind(this)} className="dont-delete">No!</button>
+            <button
+              onClick={this.onDeleteClick.bind(this)}
+              className="delete-button">Delete?</button>
+          </div>
           <button
             onClick={this.editListing.bind(this)}
-            className="edit-button" >
-            Edit
-          </button>
+            className="edit-button" >Edit</button>
           <Link to="/" className="back"><img src={back} className="icon"/>Back</Link>
         </div>
         <img src="http://placehold.it/350x350" alt="" className="four columns"/>
