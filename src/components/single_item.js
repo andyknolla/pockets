@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { elementType } from 'react-prop-types';
 import $ from 'jquery';
+import back from '../../public/resources/back.png';
+
 
 class SingleListing extends Component {
   constructor(props) {
@@ -101,8 +103,7 @@ class SingleListing extends Component {
             className="edit-button" >
             Edit
           </button>
-
-
+          <Link to="/" className="back"><img src={back} className="icon"/>Back</Link>
         </div>
         <img src="http://placehold.it/350x350" alt="" className="four columns"/>
       </div>

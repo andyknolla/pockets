@@ -23,7 +23,6 @@ a:hover {
 a:visited {
   color:#330033;
 }
-
 button, input[type="submit"]{
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
   transition: box-shadow 0.5s ease;
@@ -47,14 +46,11 @@ button:hover {
 }
 .name-input {
   width: 150px;
-  /*display: flex;*/
   margin-right: 5px;
 }
 .url-input {
   width: 200px;
-  /*display: flex;*/
 }
-
 input[type="submit"] {
   background: #777B88;
   color: #E0E6FF;
@@ -62,7 +58,6 @@ input[type="submit"] {
   margin-left: 5px;
   margin-top: 30px;
 }
-
 ul {
   margin: 15px;
 }
@@ -78,7 +73,6 @@ li {
 .url {
   font-size: .8em;
 }
-
 .card {
   background: white;
   position: relative;
@@ -86,15 +80,13 @@ li {
   border-radius: 3px;
   border: 1px solid lightgray;
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -webkit-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-
 .card:hover {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  transform: scale(1.1, 1.1);
+  transform: scale(1.03, 1.03);
 }
-
 .single-listing {
   margin-top: 20px;
   background: white;
@@ -102,7 +94,6 @@ li {
   border-radius: 3px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
-
 #edit-listing {
   display: none;
 }
@@ -116,4 +107,11 @@ li {
 }
 .delete-button {
   color: #660033;
+}
+.back {
+  display: block;
+  margin-top: 10px;
+}
+.back .icon {
+  margin-right: 8px;
 }

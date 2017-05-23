@@ -7,15 +7,11 @@ import SingleListing from './components/single_item';
 
 const Routes = () => (
   <Router>
-    <div>
       <Switch>
         <Route exact path="/" component={App} />
-        <Route path="/:id" component={SingleListing} />
-        <Route component={NotFound} />
+        <Route path="*" component={NotFound} />
       </Switch>
-    </div>
   </Router>
 );
-
 
 export default Routes;
