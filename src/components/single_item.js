@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
-
 import { Link } from 'react-router-dom';
 import { elementType } from 'react-prop-types';
 import $ from 'jquery';
 import back from '../../public/resources/back.png';
 
+function validate(titleInput, urlInput) {
+  return {
+    titleInput: titleInput.length === 0,
+    urlInput: urlInput.length === 0,
+  };
+}
 
 class SingleListing extends Component {
   constructor(props) {
     super(props);
-
-
-    const propTypes = {
-      router: elementType
-    }
-
     this.state = {
       listingData: [],
       postId: undefined,
       titleInput: '',
-      urlInput: ''
+      urlInput: '',
+      touched: {
+        titleInput: false,
+        urlInput: false,
+      }
     }
   }
 
@@ -33,13 +36,11 @@ class SingleListing extends Component {
           titleInput: data.data.data.data.attributes.title,
           urlInput: data.data.data.data.attributes.url
         })
-        console.log(data.data.data.data.attributes);
       }.bind(this))
   }
   componentDidMount() {
     $('#edit-listing').hide();
   }
-
   handleTitleInputChange() {
     this.setState({
       titleInput: this.refs.title.value
@@ -50,22 +51,12 @@ class SingleListing extends Component {
       urlInput: this.refs.url.value
     })
   }
-
-  submitForm(e) {
-    e.preventDefault();
-    helpers.editListing(this.state.postId, this.state.titleInput, this.state.urlInput )
-    .then( () => {
-      this.props.history.push('/');
-    });
-  }
-
   onDeleteClick() {
     helpers.deletePost(this.state.postId)
     .then( () => {
       this.props.history.push('/');
     });
   }
-
   editListing() {
     $('#edit-listing').show();
     $('.single-heading, .edit-button').hide()
@@ -74,8 +65,28 @@ class SingleListing extends Component {
     $('#edit-listing').hide();
     $('.single-heading, .edit-button').show();
   }
+  handleBlur = (field) => (evt) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true },
+    });
+  }
+  submitForm(e) {
+    e.preventDefault();
+    helpers.editListing(this.state.postId, this.state.titleInput, this.state.urlInput )
+    .then( () => {
+      this.props.history.push('/');
+    });
+  }
 
   render() {
+    const errors = validate(this.state.titleInput, this.state.urlInput);
+    // const { titleInput, urlInput } = this.state;
+    const isEnabled = !Object.keys(errors).some(x => errors[x]);
+    const shouldMarkError = (field) => {
+      const hasError = errors[field];
+      const shouldShow = this.state.touched[field];
+      return hasError ? shouldShow : false;
+    };
     return (
       <div className="single-listing container">
         <div className="eight columns">
@@ -83,14 +94,34 @@ class SingleListing extends Component {
             <h2>{this.state.listingData.title}</h2>
             <p className="">{this.state.listingData.url}</p>
           </div>
-          <form id="edit-listing">
+          <form id="edit-listing" onSubmit={this.submitForm.bind(this)}>
             <label htmlFor="title-input">Name</label>
-            <input id="title-input" type="text" ref="title" onChange={this.handleTitleInputChange.bind(this)} value={this.state.titleInput} placeholder="Name"></input>
+            <input
+              id="title-input"
+              type="text"
+              ref="title"
+              value={this.state.titleInput}
+              placeholder="Name"
+              className={shouldMarkError('titleInput') ? "error" : ""}
+              onChange={this.handleTitleInputChange.bind(this)}
+              onBlur={this.handleBlur('titleInput')}
+              ></input>
+              <div className={shouldMarkError('titleInput') ? "error-text" : "hidden"}>Cannot be left blank</div>
+
             <label htmlFor="url-input">Url</label>
-            <input id="url-input" type="url" ref="url" onChange={this.handleUrlInputChange.bind(this)} value={this.state.urlInput} placeholder="Url"></input>
+            <input id="url-input"
+              type="url"
+              ref="url"
+              value={this.state.urlInput}
+              placeholder="Url"
+              className={shouldMarkError('urlInput') ? "error" : ""}
+              onChange={this.handleUrlInputChange.bind(this)}
+              onBlur={this.handleBlur('urlInput')}
+              ></input>
+            <div className={shouldMarkError('urlInput') ? "error-text" : "hidden"}>Please enter a valid url</div>
             <div>
               <button className="cancel-button" onClick={this.cancel.bind(this)}>Cancel</button>
-              <input type="submit" onClick={this.submitForm.bind(this)}></input>
+              <input type="submit"></input>
             </div>
           </form>
           <button

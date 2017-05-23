@@ -26,7 +26,7 @@ button, input[type="submit"]{
 button:hover, input[type="submit"]:hover {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3)
 }
-.new-listing input {
+.new-listing input, .single-listing input {
   width: 100%;
   margin-bottom: 5px;
 }
@@ -121,12 +121,12 @@ input[type="submit"]:disabled {
   margin-right: 8px;
 }
 .error {
-  background: red;
-  border: 2px solid red !important;
+  background: rgba(248, 223, 223, 0.5) !important;
+  border: 1px solid #f55050 !important;
 }
 .error-text {
   font-size: 0.7em;
-  color: red;
+  color: #f55050;
   margin-left: 5px;
 }
 .hidden {

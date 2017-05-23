@@ -4,7 +4,6 @@ import './css/App.css';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { elementType } from 'react-prop-types';
 
-import List from './components/list';
 import SingleListing from './components/single_item';
 import Home from './components/home';
 import helpers from './utils/helpers';

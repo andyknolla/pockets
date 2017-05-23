@@ -23,8 +23,6 @@ class Home extends Component {
       }
     }
   }
-
-
   componentDidMount() {
     helpers.fetchListings()
     .then(function(data) {
@@ -33,7 +31,6 @@ class Home extends Component {
       })
     }.bind(this))
   }
-
   handleTitleInputChange() {
     this.setState({
       titleInput: this.refs.title.value
@@ -49,34 +46,28 @@ class Home extends Component {
       touched: { ...this.state.touched, [field]: true },
     });
   }
-
   submitForm(e) {
     console.log('submit');
     e.preventDefault();
     helpers.createNewListing(this.state.titleInput, this.state.urlInput )
     .then( () => {
-      // window.location.reload();
+       window.location.reload();
     });
   }
 
   render() {
-
     const errors = validate(this.state.titleInput, this.state.urlInput);
-
-    const { titleInput, urlInput } = this.state;
+    // const { titleInput, urlInput } = this.state;
     const isEnabled = !Object.keys(errors).some(x => errors[x]);
-
     const shouldMarkError = (field) => {
       const hasError = errors[field];
       const shouldShow = this.state.touched[field];
-
       return hasError ? shouldShow : false;
     };
 
-
     return (
       <div>
-        <form id="new-listing">
+        <form id="new-listing" onSubmit={this.submitForm.bind(this)} >
           <div className="new-listing">
             <div className="name-input">
               <label htmlFor="title-input">Name</label>
@@ -85,11 +76,11 @@ class Home extends Component {
                 type="text"
                 ref="title"
                 required
-                onChange={this.handleTitleInputChange.bind(this)}
-                className={shouldMarkError('titleInput') ? "error" : ""}
-                onBlur={this.handleBlur('titleInput')}
                 value={this.state.titleInput}
                 placeholder="Property name"
+                className={shouldMarkError('titleInput') ? "error" : ""}
+                onChange={this.handleTitleInputChange.bind(this)}
+                onBlur={this.handleBlur('titleInput')}
                 ></input>
                 <div className={shouldMarkError('titleInput') ? "error-text" : "hidden"}>Cannot be left blank</div>
             </div>
@@ -100,15 +91,15 @@ class Home extends Component {
                 type="url"
                 ref="url"
                 required
-                onChange={this.handleUrlInputChange.bind(this)}
-                className={shouldMarkError('urlInput') ? "error" : ""}
-                onBlur={this.handleBlur('urlInput')}
                 value={this.state.urlInput}
                 placeholder="Url"
+                className={shouldMarkError('urlInput') ? "error" : ""}
+                onChange={this.handleUrlInputChange.bind(this)}
+                onBlur={this.handleBlur('urlInput')}
                 ></input>
                 <div className={shouldMarkError('urlInput') ? "error-text" : "hidden"}>Please enter a valid url</div>
             </div>
-            <input type="submit" disabled={!isEnabled} onSubmit={this.submitForm.bind(this)}></input>
+            <input type="submit" disabled={!isEnabled} ></input>
           </div>
         </form>
 
