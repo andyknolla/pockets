@@ -2,6 +2,45 @@ body {
   background: lightgray;
   color: #464646;
 }
+a {
+  color: #660033;
+  text-decoration: none;
+}
+a:hover {
+  color:#777B88;
+}
+a:visited {
+  color:#330033;
+}
+ul {
+  margin: 15px;
+}
+li {
+  margin: 10px;
+  list-style: none;
+}
+button, input[type="submit"]{
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: box-shadow 0.5s ease;
+}
+button:hover, input[type="submit"]:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3)
+}
+.new-listing input {
+  width: 100%;
+  margin-bottom: 5px;
+}
+input[type="submit"] {
+  background: #777B88;
+  color: #E0E6FF;
+  width: 120px;
+  margin-left: 5px;
+  margin-top: 30px;
+}
+input[type="submit"]:disabled {
+  color: lightgray;
+  box-shadow: none;
+}
 .App {
   background: lightgray;
   height: 100%;
@@ -14,22 +53,6 @@ body {
   color: white;
   text-align: center;
 }
-a {
-  color: #660033;
-}
-a:hover {
-  color:#777B88;
-}
-a:visited {
-  color:#330033;
-}
-button, input[type="submit"]{
-  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-  transition: box-shadow 0.5s ease;
-}
-button:hover {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3)
-}
 .icon {
   height: 15px;
   margin-left: 5px;
@@ -41,29 +64,12 @@ button:hover {
   justify-content: center;
   flex-wrap: wrap;
 }
-.new-listing input {
-  width: 100%;
-}
 .name-input {
   width: 150px;
   margin-right: 5px;
 }
 .url-input {
   width: 200px;
-}
-input[type="submit"] {
-  background: #777B88;
-  color: #E0E6FF;
-  width: 120px;
-  margin-left: 5px;
-  margin-top: 30px;
-}
-ul {
-  margin: 15px;
-}
-li {
-  margin: 10px;
-  list-style: none;
 }
 .title {
   font-size: 1em;
@@ -95,7 +101,6 @@ li {
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 #edit-listing {
-  display: none;
 }
 .edit-button {
   margin-left: 5px;
@@ -114,4 +119,16 @@ li {
 }
 .back .icon {
   margin-right: 8px;
+}
+.error {
+  background: red;
+  border: 2px solid red !important;
+}
+.error-text {
+  font-size: 0.7em;
+  color: red;
+  margin-left: 5px;
+}
+.hidden {
+  display: none;
 }

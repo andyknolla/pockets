@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import List from './list';
 import helpers from '../utils/helpers';
 
+function validate(titleInput, urlInput) {
+  return {
+    titleInput: titleInput.length === 0,
+    urlInput: urlInput.length === 0,
+  };
+}
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -9,9 +16,14 @@ class Home extends Component {
     this.state = {
       apiListings: [],
       titleInput: '',
-      urlInput: ''
+      urlInput: '',
+      touched: {
+        titleInput: false,
+        urlInput: false,
+      }
     }
   }
+
 
   componentDidMount() {
     helpers.fetchListings()
@@ -19,7 +31,6 @@ class Home extends Component {
       this.setState({
         apiListings: data.data.data.data
       })
-      console.log(data.data.data.data);
     }.bind(this))
   }
 
@@ -33,16 +44,36 @@ class Home extends Component {
       urlInput: this.refs.url.value
     })
   }
+  handleBlur = (field) => (evt) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true },
+    });
+  }
 
   submitForm(e) {
+    console.log('submit');
     e.preventDefault();
     helpers.createNewListing(this.state.titleInput, this.state.urlInput )
     .then( () => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 
   render() {
+
+    const errors = validate(this.state.titleInput, this.state.urlInput);
+
+    const { titleInput, urlInput } = this.state;
+    const isEnabled = !Object.keys(errors).some(x => errors[x]);
+
+    const shouldMarkError = (field) => {
+      const hasError = errors[field];
+      const shouldShow = this.state.touched[field];
+
+      return hasError ? shouldShow : false;
+    };
+
+
     return (
       <div>
         <form id="new-listing">
@@ -53,11 +84,14 @@ class Home extends Component {
                 id="title-input"
                 type="text"
                 ref="title"
+                required
                 onChange={this.handleTitleInputChange.bind(this)}
+                className={shouldMarkError('titleInput') ? "error" : ""}
+                onBlur={this.handleBlur('titleInput')}
                 value={this.state.titleInput}
                 placeholder="Property name"
-                className=""
                 ></input>
+                <div className={shouldMarkError('titleInput') ? "error-text" : "hidden"}>Cannot be left blank</div>
             </div>
             <div className="url-input">
               <label htmlFor="url-input">Url</label>
@@ -65,14 +99,17 @@ class Home extends Component {
                 id="url-input"
                 type="url"
                 ref="url"
+                required
                 onChange={this.handleUrlInputChange.bind(this)}
+                className={shouldMarkError('urlInput') ? "error" : ""}
+                onBlur={this.handleBlur('urlInput')}
                 value={this.state.urlInput}
                 placeholder="Url"
-                className=""
                 ></input>
+                <div className={shouldMarkError('urlInput') ? "error-text" : "hidden"}>Please enter a valid url</div>
             </div>
-            <input type="submit" onClick={this.submitForm.bind(this)}></input>
-        </div>
+            <input type="submit" disabled={!isEnabled} onSubmit={this.submitForm.bind(this)}></input>
+          </div>
         </form>
 
         <div className="container">

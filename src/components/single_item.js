@@ -36,6 +36,9 @@ class SingleListing extends Component {
         console.log(data.data.data.data.attributes);
       }.bind(this))
   }
+  componentDidMount() {
+    $('#edit-listing').hide();
+  }
 
   handleTitleInputChange() {
     this.setState({
@@ -81,10 +84,8 @@ class SingleListing extends Component {
             <p className="">{this.state.listingData.url}</p>
           </div>
           <form id="edit-listing">
-
             <label htmlFor="title-input">Name</label>
             <input id="title-input" type="text" ref="title" onChange={this.handleTitleInputChange.bind(this)} value={this.state.titleInput} placeholder="Name"></input>
-
             <label htmlFor="url-input">Url</label>
             <input id="url-input" type="url" ref="url" onChange={this.handleUrlInputChange.bind(this)} value={this.state.urlInput} placeholder="Url"></input>
             <div>

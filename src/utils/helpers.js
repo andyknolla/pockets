@@ -24,6 +24,7 @@ const helpers = {
   },
 
   createNewListing: function(name, url) {
+    console.log('create new listing');
     let postData = {
       data: {
         attributes: {
