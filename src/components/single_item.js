@@ -91,8 +91,8 @@ class SingleListing extends Component {
       <div className="single-listing container">
         <div className="eight columns">
           <div className="single-heading">
-            <h2>{this.state.listingData.title}</h2>
-            <Link to={this.state.listingData.url ? this.state.listingData.url : ''}><p className="">{this.state.listingData.url}</p></Link>
+            <h2>{this.state.titleInput}</h2>
+            <Link to={this.state.urlInput ? this.state.urlInput : ''}><p>{this.state.urlInput}</p></Link>
           </div>
           <form id="edit-listing" onSubmit={this.submitForm.bind(this)}>
             <label htmlFor="title-input">Name</label>
