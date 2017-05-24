@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
 import { Link } from 'react-router-dom';
-import { elementType } from 'react-prop-types';
 import $ from 'jquery';
 import back from '../../public/resources/back.png';
 
@@ -20,6 +19,7 @@ class SingleListing extends Component {
       postId: undefined,
       titleInput: '',
       urlInput: '',
+      confirmDelete: false,
       touched: {
         titleInput: false,
         urlInput: false,
@@ -28,7 +28,6 @@ class SingleListing extends Component {
   }
 
   componentWillMount() {
-    // console.log('mount');
     helpers.fetchSingleListing( this.props.location.pathname )
       .then(function(data) {
         this.setState({
@@ -42,31 +41,15 @@ class SingleListing extends Component {
   componentDidMount() {
     $('#edit-listing, .delete-button, .dont-delete').hide();
   }
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    // this.setState({titleInput: nextProps.value});
-}
-  handleTitleInputChange(event) {
+  handleInputChange(name, event) {
     this.setState({
-      titleInput: event.currentTarget.value
+      [name]: event.target.value
     })
   }
-  handleUrlInputChange(event) {
+  toggleDelete() {
     this.setState({
-      urlInput: event.currentTarget.value
+      confirmDelete: this.state.confirmDelete ? false : true
     })
-    console.log('url state', this.state.urlInput);
-  }
-  showDelete() {
-    $('.delete-button').show();
-    $('.dont-delete').show();
-    $('.dummy-delete-button').hide();
-    // console.log(this.state.urlInput)
-  }
-  dontDelete() {
-    $('.dummy-delete-button').show();
-    $('.delete-button').hide();
-    $('.dont-delete').hide();
   }
   onDeleteClick() {
     helpers.deletePost(this.state.postId)
@@ -88,7 +71,6 @@ class SingleListing extends Component {
     });
   }
   submitForm(e) {
-    // console.log(this.state.urlInput);
     e.preventDefault();
     helpers.editListing(this.state.postId, this.state.titleInput, this.state.urlInput )
     .then( () => {
@@ -118,11 +100,11 @@ class SingleListing extends Component {
             <input
               id="title-input"
               type="text"
-              ref="title"
+              name="titleInput"
               value={this.state.titleInput}
               placeholder="Name"
               className={shouldMarkError('titleInput') ? "error" : ""}
-              onChange={this.handleTitleInputChange.bind(this)}
+              onChange={this.handleInputChange.bind(this, 'titleInput')}
               onBlur={this.handleBlur('titleInput')}
               ></input>
               <div className={shouldMarkError('titleInput') ? "error-text" : "hidden"}>Cannot be left blank</div>
@@ -130,17 +112,17 @@ class SingleListing extends Component {
             <label htmlFor="url-input">Url</label>
             <input id="url-input"
               type="url"
-              ref="url"
+              name="urlInput"
               value={this.state.urlInput}
               placeholder="Url"
               className={shouldMarkError('urlInput') ? "error" : ""}
-              onChange={this.handleUrlInputChange.bind(this)}
+              onChange={this.handleInputChange.bind(this, 'urlInput')}
               onBlur={this.handleBlur('urlInput')}
               ></input>
             <div className={shouldMarkError('urlInput') ? "error-text" : "hidden"}>Please enter a valid url</div>
             <div>
               <button className="cancel-button" onClick={this.cancel.bind(this)}>Cancel</button>
-              <input type="submit"></input>
+              <input type="submit" disabled={!isEnabled}></input>
             </div>
           </form>
           <button
@@ -148,16 +130,18 @@ class SingleListing extends Component {
             className="edit-button" >Edit</button>
             <div className="delete-group">
               <button
-                onClick={this.showDelete.bind(this)}
-                className="dummy-delete-button">Delete</button>
-              <button onClick={this.dontDelete.bind(this)} className="dont-delete">No!</button>
+                onClick={this.toggleDelete.bind(this)}
+                className={this.state.confirmDelete ? "hidden" : "dummy-delete-button"}>Delete</button>
+              <button
+                onClick={this.toggleDelete.bind(this)}
+                className={this.state.confirmDelete ? "dont-delete" : "hidden"}>No!</button>
               <button
                 onClick={this.onDeleteClick.bind(this)}
-                className="delete-button">Delete?</button>
+                className={this.state.confirmDelete ? "delete-button" : "hidden"}>Delete?</button>
             </div>
-          <Link to="/" className="back"><img src={back} className="icon"/>Back</Link>
+          <Link to="/" className="back"><img src={back} className="icon" alt="back"/>Back</Link>
         </div>
-        <img src="http://placehold.it/350x350" alt="" className="four columns"/>
+        <img src="http://placehold.it/350x350" alt="Placeholder" className="four columns"/>
       </div>
     )
   }

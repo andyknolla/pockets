@@ -31,23 +31,15 @@ class Home extends Component {
       })
     }.bind(this))
   }
-  handleTitleInputChange() {
+  handleInputChange(name, event) {
     this.setState({
-      titleInput: this.refs.title.value
-    })
-  }
-  handleUrlInputChange() {
-    this.setState({
-      urlInput: this.refs.url.value
+      [name]: event.target.value
     })
   }
   handleBlur = (field) => (evt) => {
     this.setState({
       touched: { ...this.state.touched, [field]: true },
     });
-  }
-  disabled() {
-    
   }
   submitForm(e) {
     e.preventDefault();
@@ -75,12 +67,12 @@ class Home extends Component {
               <input
                 id="title-input"
                 type="text"
-                ref="title"
+                name="titleInput"
                 required
                 value={this.state.titleInput}
                 placeholder="Property name"
                 className={shouldMarkError('titleInput') ? "error" : ""}
-                onChange={this.handleTitleInputChange.bind(this)}
+                onChange={this.handleInputChange.bind(this, 'titleInput')}
                 onBlur={this.handleBlur('titleInput')}
                 ></input>
                 <div className={shouldMarkError('titleInput') ? "error-text" : "hidden"}>Cannot be left blank</div>
@@ -90,20 +82,19 @@ class Home extends Component {
               <input
                 id="url-input"
                 type="url"
-                ref="url"
+                name="urlInput"
                 required
                 value={this.state.urlInput}
                 placeholder="Url"
                 className={shouldMarkError('urlInput') ? "error" : ""}
-                onChange={this.handleUrlInputChange.bind(this)}
+                onChange={this.handleInputChange.bind(this, 'urlInput')}
                 onBlur={this.handleBlur('urlInput')}
                 ></input>
                 <div className={shouldMarkError('urlInput') ? "error-text" : "hidden"}>Please enter a valid url</div>
             </div>
-            <input type="submit" disabled={!isEnabled} onClick={this.disabled.bind(this)} value="Enter"></input>
+            <input type="submit" disabled={!isEnabled} value="Enter"></input>
           </div>
         </form>
-
         <div className="container">
           <List listings={this.state.apiListings} />
         </div>
