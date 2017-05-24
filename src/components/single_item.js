@@ -28,6 +28,7 @@ class SingleListing extends Component {
   }
 
   componentWillMount() {
+    // console.log('mount');
     helpers.fetchSingleListing( this.props.location.pathname )
       .then(function(data) {
         this.setState({
@@ -41,20 +42,26 @@ class SingleListing extends Component {
   componentDidMount() {
     $('#edit-listing, .delete-button, .dont-delete').hide();
   }
-  handleTitleInputChange() {
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    // this.setState({titleInput: nextProps.value});
+}
+  handleTitleInputChange(event) {
     this.setState({
-      titleInput: this.refs.title.value
+      titleInput: event.currentTarget.value
     })
   }
-  handleUrlInputChange() {
+  handleUrlInputChange(event) {
     this.setState({
-      urlInput: this.refs.url.value
+      urlInput: event.currentTarget.value
     })
+    console.log('url state', this.state.urlInput);
   }
   showDelete() {
     $('.delete-button').show();
     $('.dont-delete').show();
     $('.dummy-delete-button').hide();
+    // console.log(this.state.urlInput)
   }
   dontDelete() {
     $('.dummy-delete-button').show();
@@ -81,10 +88,12 @@ class SingleListing extends Component {
     });
   }
   submitForm(e) {
+    // console.log(this.state.urlInput);
     e.preventDefault();
     helpers.editListing(this.state.postId, this.state.titleInput, this.state.urlInput )
     .then( () => {
-      this.props.history.push('/');
+      $('#edit-listing').hide();
+      $('.single-heading, .edit-button').show();
     });
   }
 
@@ -134,18 +143,18 @@ class SingleListing extends Component {
               <input type="submit"></input>
             </div>
           </form>
-          <div className="delete-group">
-            <button
-              onClick={this.showDelete.bind(this)}
-              className="dummy-delete-button">Delete</button>
-            <button onClick={this.dontDelete.bind(this)} className="dont-delete">No!</button>
-            <button
-              onClick={this.onDeleteClick.bind(this)}
-              className="delete-button">Delete?</button>
-          </div>
           <button
             onClick={this.editListing.bind(this)}
             className="edit-button" >Edit</button>
+            <div className="delete-group">
+              <button
+                onClick={this.showDelete.bind(this)}
+                className="dummy-delete-button">Delete</button>
+              <button onClick={this.dontDelete.bind(this)} className="dont-delete">No!</button>
+              <button
+                onClick={this.onDeleteClick.bind(this)}
+                className="delete-button">Delete?</button>
+            </div>
           <Link to="/" className="back"><img src={back} className="icon"/>Back</Link>
         </div>
         <img src="http://placehold.it/350x350" alt="" className="four columns"/>
