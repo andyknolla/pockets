@@ -27,7 +27,7 @@ class Home extends Component {
     helpers.fetchListings()
     .then(function(data) {
       this.setState({
-        apiListings: data.data.data.data
+        apiListings: data.data
       })
     }.bind(this))
   }

@@ -31,10 +31,10 @@ class SingleListing extends Component {
     helpers.fetchSingleListing( this.props.location.pathname )
       .then(function(data) {
         this.setState({
-          listingData: data.data.data.data.attributes,
-          postId: data.data.data.data.id,
-          titleInput: data.data.data.data.attributes.title,
-          urlInput: data.data.data.data.attributes.url
+          listingData: data.data.attributes,
+          postId: data.data.id,
+          titleInput: data.data.attributes.title,
+          urlInput: data.data.attributes.url
         })
       }.bind(this))
   }
@@ -95,7 +95,6 @@ class SingleListing extends Component {
             <Link to={this.state.listingData.url ? this.state.listingData.url : ''}><p className="">{this.state.listingData.url}</p></Link>
           </div>
           <form id="edit-listing" onSubmit={this.submitForm.bind(this)}>
-
             <label htmlFor="title-input">Name</label>
             <input
               id="title-input"
@@ -108,7 +107,6 @@ class SingleListing extends Component {
               onBlur={this.handleBlur('titleInput')}
               ></input>
               <div className={shouldMarkError('titleInput') ? "error-text" : "hidden"}>Cannot be left blank</div>
-
             <label htmlFor="url-input">Url</label>
             <input id="url-input"
               type="url"

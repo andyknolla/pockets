@@ -1,7 +1,9 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+//const dotenv = require('dotenv');
 
 const config = {
-  headers: { 'Authorization': 'b4caaa6dc0bac64f536fea340c5f8d29'}
+  headers: { 'Authorization': process.env.REACT_APP_API_KEY}
 }
 
 const helpers = {
@@ -9,7 +11,7 @@ const helpers = {
     return axios.get('https://clientside-api.herokuapp.com/api/v1/listings/', config)
     .then(function(data) {
       return {
-        data: data
+        data: data.data.data
       }
     })
   },
@@ -18,7 +20,7 @@ const helpers = {
     return axios.get(`https://clientside-api.herokuapp.com/api/v1/listings/${id}`, config)
     .then(function(data) {
       return {
-        data: data
+        data: data.data.data
       }
     })
   },
