@@ -1,5 +1,4 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
 import runtimeEnv from '@mars/heroku-js-runtime-env';
 const env = runtimeEnv()
 const config = {
@@ -26,7 +25,6 @@ const helpers = {
   },
 
   createNewListing: function(name, url) {
-    console.log('create new listing');
     let postData = {
       data: {
         attributes: {

@@ -50,6 +50,7 @@ class Home extends Component {
   }
 
   render() {
+    // Validation
     const errors = validate(this.state.titleInput, this.state.urlInput);
     const isEnabled = !Object.keys(errors).some(x => errors[x]);
     const shouldMarkError = (field) => {

@@ -8,7 +8,6 @@
   "dependencies": {
     "@mars/heroku-js-runtime-env": "^3.0.0",
     "axios": "^0.16.1",
-    "dotenv": "^4.0.0",
     "jquery": "^3.2.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
