@@ -1,9 +1,9 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-//const dotenv = require('dotenv');
-
+import runtimeEnv from '@mars/heroku-js-runtime-env';
+const env = runtimeEnv()
 const config = {
-  headers: { 'Authorization': process.env.REACT_APP_API_KEY}
+  headers: { 'Authorization': env.REACT_APP_API_KEY}
 }
 
 const helpers = {
