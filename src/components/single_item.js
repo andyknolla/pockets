@@ -15,7 +15,6 @@ class SingleListing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listingData: [],
       postId: undefined,
       titleInput: '',
       urlInput: '',
@@ -31,7 +30,6 @@ class SingleListing extends Component {
     helpers.fetchSingleListing( this.props.location.pathname )
       .then(function(data) {
         this.setState({
-          listingData: data.data.attributes,
           postId: data.data.id,
           titleInput: data.data.attributes.title,
           urlInput: data.data.attributes.url
